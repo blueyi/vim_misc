@@ -13,11 +13,12 @@
 " win下使用cmd执行以下两条命令(默认cmd路径在当前用户文件夹)：
 "   1."md vimfiles\bundle\Vundle.vim"
 "   2."git clone https://github.com/VundleVim/Vundle.vim.git vimfiles\bundle\Vundle.vim"
-"   将_vimrc放在用户根目录下即可 
-"   如果想让插件和vim在同一文件夹，只需要将vimfiles文件夹与vim文件处于同一个文件夹下
-"   并将_vimrc放在该文件夹下  
+"   将_vimrc放在用户根目录下，并修改下面"Vundle插件管理工具配置"里面的rtp内容为用户目录即可
 "
-" 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件  
+"   如果想让插件和vim在同一文件夹，只需要将vimfiles文件夹与vim文件处于同一个文件夹下
+"   并将_vimrc放在该文件夹下（本_vimrc的默认配置即是如此）
+"
+" 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件，重启后即安装完成一切
 "
 "
 " =============================================================================
@@ -141,8 +142,12 @@ if g:islinux
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 else
+    "设置vundle插件路径为VIM安装同目录
     set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
     let path='$VIM/vimfiles/bundle'
+    "设置vundle插件路径为用户文件夹的根目录
+    "set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+    "let path='$HOME/vimfiles/bundle'
     call vundle#begin(path)
 endif
 
