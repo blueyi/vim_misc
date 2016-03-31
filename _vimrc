@@ -1,4 +1,26 @@
 " =============================================================================
+"        需要手动进行的操作
+" =============================================================================
+" 1.建立自动备份文件夹"~/vimbak"，不管是win还是linux都创建在个人用户下。vim自动
+" 生成的后缀为"~"和"un~"的备份文件和undo文件将统一存放在该文件夹
+"
+" 2.手动创建vim插件管理器vundle的文件夹并clone vundle插件到该文件夹:
+" linux下执行以下两条命令：
+"   1."mkdir -p ~/.vim/bundle/Vundle.vim"
+"   2."git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+"   将.vimrc放在用户根目录下即可 
+"
+" win下使用cmd执行以下两条命令(默认cmd路径在当前用户文件夹)：
+"   1."md vimfiles\bundle\Vundle.vim"
+"   2."git clone https://github.com/VundleVim/Vundle.vim.git vimfiles\bundle\Vundle.vim"
+"   将_vimrc放在用户根目录下即可 
+"   如果想让插件和vim在同一文件夹，只需要将vimfiles文件夹与vim文件处于同一个文件夹下
+"   并将_vimrc放在该文件夹下  
+"
+" 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件  
+"
+"
+" =============================================================================
 "        << 判断操作系统是 Windows 还是 Linux 和判断是终端还是 Gvim >>
 " =============================================================================
 
@@ -399,7 +421,11 @@ Plugin 'VundleVim/Vundle.vim'
     "  < 其它配置 >
     " -----------------------------------------------------------------------------
     set writebackup                             "保存文件前建立备份，保存成功后删除该备份
-    set nobackup                                "设置无备份文件
+    set backup "开启备份
+    set backupdir=~/vimbak "设置自动备份文件夹
+    set undodir=~/vimbak  "设置un~文件夹
+
+    "set nobackup                                "设置无备份文件
     " set noswapfile                              "设置无临时文件
     " set vb t_vb=                                "关闭提示音
 
