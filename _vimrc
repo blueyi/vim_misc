@@ -495,17 +495,17 @@ Plugin 'VundleVim/Vundle.vim'
 
     " Recommended key-mappings.
     " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-        return neocomplete#close_popup() . "\<CR>"
-        " For no inserting <CR> key.
-        "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-    endfunction
+""    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+""    function! s:my_cr_function()
+""        return neocomplete#close_popup() . "\<CR>"
+""        " For no inserting <CR> key.
+""        "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+""    endfunction
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     " <C-h>, <BS>: close popup and delete backword char.
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
     " Close popup by <Space>.
@@ -554,27 +554,27 @@ Plugin 'VundleVim/Vundle.vim'
     "--Youcompleteme configure--
     "Recompile and diagnostics withe F5
     "    nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-    let g:ycm_use_ultisnips_completer = 1
-
-    "let g:ycm_global_ycm_extra_conf = '$VIM\vimfiles\bundle\YouCompleteMe\python\.ycm_extra_conf.py'
-    " 设置转到定义处的快捷键为ALT + G，这个功能非常赞
-    nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR>
-    " 补全功能在注释中同样有效
-    let g:ycm_complete_in_comments=1
-    " 开启标签补全
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    " 从第一个键入字符就开始罗列匹配项
-    let g:ycm_min_num_of_chars_for_completion=1
-    "离开插入模式后自动关闭预览窗口
-    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-    " 禁止缓存匹配项，每次都重新生成匹配项
-    let g:ycm_cache_omnifunc=0
-    " 语法关键字补全
-    let g:ycm_seed_identifiers_with_syntax=1
-    " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
-    let g:ycm_key_invoke_completion = '<M-;>'
-    "回车即选中当前项
-    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+""    let g:ycm_use_ultisnips_completer = 1
+""
+""    "let g:ycm_global_ycm_extra_conf = '$VIM\vimfiles\bundle\YouCompleteMe\python\.ycm_extra_conf.py'
+""    " 设置转到定义处的快捷键为ALT + G，这个功能非常赞
+""    nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR>
+""    " 补全功能在注释中同样有效
+""    let g:ycm_complete_in_comments=1
+""    " 开启标签补全
+""    let g:ycm_collect_identifiers_from_tags_files = 1
+""    " 从第一个键入字符就开始罗列匹配项
+""    let g:ycm_min_num_of_chars_for_completion=1
+""    "离开插入模式后自动关闭预览窗口
+""    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+""    " 禁止缓存匹配项，每次都重新生成匹配项
+""    let g:ycm_cache_omnifunc=0
+""    " 语法关键字补全
+""    let g:ycm_seed_identifiers_with_syntax=1
+""    " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
+""    let g:ycm_key_invoke_completion = '<M-;>'
+""    "回车即选中当前项
+""    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
     "***************
     "--vim-airline configure--
@@ -738,9 +738,18 @@ Plugin 'VundleVim/Vundle.vim'
     "***************
     " --delimitMate configure--
     " -----------------------------------------------------------------------------
-    let delimitMate_matchpairs = "(:),[:],{:}"
+    let g:delimitMate_autoclose = 1
+    let g:delimitMate_matchpairs = "(:),[:],{:},<:>"
     au FileType cpp,md let b:delimitMate_matchpairs = "(:),[:],{:}"
 
+    "换行自动缩进
+    let g:delimitMate_expand_cr = 1
+    "仅针对cpp和c文件生效
+    "au FileType cpp,c let b:delimitMate_expand_cr = 1
+    let g:delimitMate_jump_expansion = 1
+    let g:delimitMate_expand_space = 1
+    let g:delimitMate_expand_inside_quotes = 1
+    let g:delimitMate_balance_matchpairs = 1
 
     " --easytags configure--
     let g:easytags_file = './tags'
