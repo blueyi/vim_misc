@@ -324,9 +324,9 @@ Plugin 'VundleVim/Vundle.vim'
     set whichwrap=b,s,<,>,[,] " 光标从行首和行末时可以跳到另一行去
     "set hidden " Hide buffers when they are abandoned
     set mouse=a            " Enable mouse usage (all modes)    "使用鼠标
-    set number            " Enable line number    "显示行号
     "set previewwindow    " 标识预览窗口
     set history=50        " set command history to 50    "历史记录50条
+    set list listchars=tab:»·,trail:·   "显示多余的空白字符
 
 
     " 当文件在外部被修改，自动更新该文件
@@ -370,7 +370,8 @@ Plugin 'VundleVim/Vundle.vim'
         endif
     endfunction
 
-    nmap <leader>z :call Zoom()<CR>
+    "<leader>是反斜扛\
+    nmap <leader>z :call Zoom()<CR>  
 
 
     "  < 界面配置 >
@@ -378,7 +379,14 @@ Plugin 'VundleVim/Vundle.vim'
     set number                                            "显示行号
     set laststatus=2                                      "启用状态栏信息
     set cmdheight=2                                       "设置命令行的高度为2，默认为1
-    set cursorline                                        "突出显示当前行
+
+"    set cursorline                                        "突出显示当前行
+
+    "突出显示当前行和当前列
+    au WinLeave * set nocursorline nocursorcolumn
+    au WinEnter * set cursorline cursorcolumn
+    set cursorline cursorcolumn
+
     " set guifont=YaHei_Consolas_Hybrid:h8                 "设置字体:字号（字体名称空格用下划线代替）
     set wrap                                            "设置不自动换行
     set shortmess=atI                                     "去掉欢迎界面
