@@ -332,11 +332,11 @@ Plugin 'VundleVim/Vundle.vim'
     "set noswapfile             "设置无临时文件
  
     "--导航相关设置--
-    "set cursorline             "突出显示当前行
+    set cursorline             "突出显示当前行
     "-突出显示当前行和当前列-
     au WinLeave * set nocursorline nocursorcolumn
     au WinEnter * set cursorline cursorcolumn
-    set cursorline cursorcolumn
+    "set cursorline cursorcolumn
     "-代码折叠设置-
     "set foldenable                                        "启用折叠
     set foldmethod=syntax " 用语法高亮来定义折叠
@@ -677,6 +677,22 @@ Plugin 'VundleVim/Vundle.vim'
             endif
         endif
     endfunc
+
+    "使用make编译
+    "-- QuickFix setting --
+    " 按下F6，执行make clean
+    " map <F6> :make clean<CR><CR><CR>
+    " 按下F7，执行make编译程序，并打开quickfix窗口，显示编译信息
+    " map <F7> :make<CR><CR><CR> :copen<CR><CR>
+    " 按下F8，光标移到上一个错误所在的行
+    " map <F8> :cp<CR>
+    " 按下F9，光标移到下一个错误所在的行
+    " map <F9> :cn<CR>
+    " 以下的映射是使上面的快捷键在插入模式下也能用
+    " imap <F6> <ESC>:make clean<CR><CR><CR>
+    " imap <F7> <ESC>:make<CR><CR><CR> :copen<CR><CR>
+    " imap <F8> <ESC>:cp<CR>
+    " imap <F9> <ESC>:cn<CR>
 
      "-- For ruby development setting --
     " install rsense
