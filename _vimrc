@@ -488,25 +488,61 @@ Plugin 'VundleVim/Vundle.vim'
     nnoremap <F4> :GundoToggle<CR>
 
     "-- For C# development setting --
-    " F6 compile cs file
+    " F5 compile cs file
     map <F5> :!csc % <CR>
     imap <F5> <ESC>!csc % <CR>
-    " F8 run CUDA file
-    map <F6> :!%<.exe <CR>
-    imap <F6> <ESC>!%<.exe  <CR>
 
     "-- For CUDA development setting --
-    " F7 compile cu file
-    map <F7> :!nvcc --ptxas-options=-v % -o %<.exe <CR>
-    imap <F7> <ESC>!nvcc --ptxas-options=-v % -o %<.exe <CR>
-    " F8 run CUDA file
-    map <F8> :!%<.exe <CR>
-    imap <F8> <ESC>!%<.exe  <CR>
+    " F7 compile, link and execute .cu file with Samples header file
+    map <F7> :call Nvcc_S() <CR>
+    imap <F7> <ESC> :call Nvcc_S() <CR>
+    " F8 compile, link and execute .cu file without Samples header file
+    map <F8> :call Nvcc() <CR>
+    imap <F8> <ESC> :call Nvcc() <CR>
+    "将CUDA Samples中的头文件加入编译路径
+    func! Nvcc_S()
+        exe ":ccl"
+        exe ":update"
+        if g:iswindows
+            exe ':!nvcc --ptxas-options=-v % -I "C:\ProgramData\NVIDIA Corporation\CUDA Samples\v7.5\common\inc" -o %<.exe'
+        else
+            exe ':!nvcc --ptxas-options=-v % -I "C:\ProgramData\NVIDIA Corporation\CUDA Samples\v7.5\common\inc" -o %<.o'
+        endif
+        if v:shell_error == 0
+            if g:iswindows
+                exe ":!%<.exe"
+            else
+                exe ":!%<.o"
+            endif
+        endif
+    endfunc
+
+    func! Nvcc()
+        exe ":ccl"
+        exe ":update"
+        if g:iswindows
+            exe ':!nvcc --ptxas-options=-v % -o %<.exe'
+        else
+            exe ':!nvcc --ptxas-options=-v % -o %<.o'
+        endif
+        if v:shell_error == 0
+            if g:iswindows
+                exe ":!%<.exe"
+            else
+                exe ":!%<.o"
+            endif
+        endif
+    endfunc
 
     "-- For python development setting --
     " F9 run python
-    map <F9> :!python % <CR>
-    imap <F9> <ESC>:!python % <CR>
+    map <F9> :call Py_run() <CR>
+    imap <F9> <ESC> :call Py_run() <CR>
+    func! Py_run()
+        exe ":ccl"
+        exe ":update"
+        exe ":!python %"
+    endfunc
 
     "--For C/C++ setting--
     " F10 一键保存、编译、连接存并运行
@@ -853,7 +889,7 @@ Plugin 'VundleVim/Vundle.vim'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_python_exec = 'C:\Program Files\Python 3.5\python.exe'
+    "let g:syntastic_python_python_exec = 'C:\Program Files\Python 3.5\python.exe'
     "默认使用g++
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     "如果使用clang++则需要以下
