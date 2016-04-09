@@ -678,6 +678,22 @@ Plugin 'VundleVim/Vundle.vim'
         endif
     endfunc
 
+    "使用make编译
+    "-- QuickFix setting --
+    " 按下F6，执行make clean
+    " map <F6> :make clean<CR><CR><CR>
+    " 按下F7，执行make编译程序，并打开quickfix窗口，显示编译信息
+    " map <F7> :make<CR><CR><CR> :copen<CR><CR>
+    " 按下F8，光标移到上一个错误所在的行
+    " map <F8> :cp<CR>
+    " 按下F9，光标移到下一个错误所在的行
+    " map <F9> :cn<CR>
+    " 以下的映射是使上面的快捷键在插入模式下也能用
+    " imap <F6> <ESC>:make clean<CR><CR><CR>
+    " imap <F7> <ESC>:make<CR><CR><CR> :copen<CR><CR>
+    " imap <F8> <ESC>:cp<CR>
+    " imap <F9> <ESC>:cn<CR>
+
      "-- For ruby development setting --
     " install rsense
     "let g:rsenseHome = "/home/blueyi/opt/rsense-0.3"
