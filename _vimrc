@@ -243,7 +243,7 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'scrooloose/nerdtree'
 
     "Simple templates plugin for Vim
-    Plugin 'aperezdc/vim-template'
+    Plugin 'blueyi/vim-template'
 
 
 
@@ -332,11 +332,11 @@ Plugin 'VundleVim/Vundle.vim'
     "set noswapfile             "设置无临时文件
  
     "--导航相关设置--
-    "set cursorline             "突出显示当前行
+    set cursorline             "突出显示当前行
     "-突出显示当前行和当前列-
     au WinLeave * set nocursorline nocursorcolumn
     au WinEnter * set cursorline cursorcolumn
-    set cursorline cursorcolumn
+    "set cursorline cursorcolumn
     "-代码折叠设置-
     "set foldenable                                        "启用折叠
     set foldmethod=syntax " 用语法高亮来定义折叠
@@ -987,7 +987,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 
     " --easytags configure--
-    let g:easytags_file = './tags'
+    let g:easytags_file = '~/vimbak/tags'
 
 
     "--------Plugin setting end------------
@@ -998,6 +998,7 @@ Plugin 'VundleVim/Vundle.vim'
     " -----------------------------------------------------------------------------
     " 对浏览代码非常的方便,可以在函数,变量之间跳转等
     set tags=./tags,tags;$HOME
+    set tags+=~/vimbak/tags
     "set tags+=./addtags/qt5_h
     "set tags+=./addtags/cpp_stl
     "set tags+=./addtags/qt5_cpp
