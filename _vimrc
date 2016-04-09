@@ -3,6 +3,8 @@
 " =============================================================================
 " 推荐使用这个编译版本https://tuxproject.de/projects/vim/，这个版本对lua等支持都有，或者官方版本，官网版本暂时发现不支持lua，很多插件需要vim
 " 对lua的支持，例如neocomplete  
+" 默认下载的vim或者vim绿色版本可以需要的文件在https://github.com/blueyi/vim_misc.git
+"
 " 1.建立自动备份文件夹"~/vimbak"，不管是win还是linux都创建在个人用户下。vim自动
 " 生成的后缀为"~"和"un~"的备份文件和undo文件、swap文件、tags文件等将统一存放在该文件夹
 "
@@ -15,9 +17,11 @@
 " win下使用cmd执行以下两条命令(默认cmd路径在当前用户文件夹)：
 "   1."md vimfiles\bundle\Vundle.vim"
 "   2."git clone https://github.com/VundleVim/Vundle.vim.git vimfiles\bundle\Vundle.vim"
-"   将_vimrc放在用户根目录下即可 
+"   将_vimrc放在用户根目录下，或者放在vim安装文件夹同目录，并搜索修改下面vundle配置中的rtp
+"   和path将相应内容注释掉
+"
 "   如果想让插件和vim在同一文件夹，只需要将vimfiles文件夹与vim文件处于同一个文件夹下
-"   并将_vimrc放在该文件夹下  
+"   并将_vimrc放在该文件夹下（本vimrc中的vundle默认采用这种方式）
 "
 " 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件  
 "
@@ -146,8 +150,12 @@ if g:islinux
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
 else
+    "vimfiles文件夹与vim处于同一文件夹
     set rtp+=$VIM/vimfiles/bundle/Vundle.vim/
     let path='$VIM/vimfiles/bundle'
+    "vimfiles文件夹在用户文件夹
+    "set rtp+=~/vimfiles/bundle/Vundle.vim/
+    "let path='~/vimfiles/bundle'
     call vundle#begin(path)
 endif
 
