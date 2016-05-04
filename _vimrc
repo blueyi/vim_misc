@@ -493,9 +493,9 @@ Plugin 'VundleVim/Vundle.vim'
     imap <F5> <ESC>!csc % <CR>
 
     "-- For CUDA development setting --
-    " F7 compile, link and execute .cu file with Samples header file
-    map <F7> :call Nvcc_S() <CR>
-    imap <F7> <ESC> :call Nvcc_S() <CR>
+    " Ctrl + F8 compile, link and execute .cu file with Samples header file
+    map <C-F8> :call Nvcc_S() <CR>
+    imap <C-F8> <ESC> :call Nvcc_S() <CR>
     " F8 compile, link and execute .cu file without Samples header file
     map <F8> :call Nvcc() <CR>
     imap <F8> <ESC> :call Nvcc() <CR>
