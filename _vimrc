@@ -889,13 +889,14 @@ Plugin 'VundleVim/Vundle.vim'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-    "let g:syntastic_python_python_exec = 'C:\Program Files\Python 3.5\python.exe'
+    let g:syntastic_python_python_exec = 'C:\Program Files\Python35\python.exe'
     "默认使用g++
     let g:syntastic_cpp_compiler_options = ' -std=c++11'
     "忽略检查的文件
     let g:syntastic_mode_map = {
                 \ "mode": "passive",
-                \ "passive_filetypes": ["cu"] }
+                \ "active_filetypes": ["c", "cpp", "py"],
+                \ "passive_filetypes": ["cu"]}
     "如果使用clang++则需要以下
     "let g:syntastic_cpp_compiler = 'clang++' 
     "let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
