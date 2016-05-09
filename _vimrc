@@ -492,6 +492,27 @@ Plugin 'VundleVim/Vundle.vim'
     map <F5> :!csc % <CR>
     imap <F5> <ESC>!csc % <CR>
 
+    "-- For java development setting --
+    map <F7> :call RunJava() <CR>
+    imap <F7> <ESC> :call RunJava() <CR>
+    func! RunJava()
+        exe ":ccl"
+        exe ":update"
+        if g:iswindows
+            exe ':!javac %'
+        else
+            exe ':!javac %'
+        endif
+        if v:shell_error == 0
+            if g:iswindows
+                exe ":!java -cp . %<"
+            else
+                exe ":!java -cp . %<"
+            endif
+        endif
+    endfunc
+
+
     "-- For CUDA development setting --
     " Ctrl + F8 compile, link and execute .cu file with Samples header file
     map <C-F8> :call Nvcc_S() <CR>
@@ -740,7 +761,7 @@ Plugin 'VundleVim/Vundle.vim'
     " imap <F8> <ESC>:cp<CR>
     " imap <F9> <ESC>:cn<CR>
 
-     "-- For ruby development setting --
+    "-- For ruby development setting --
     " install rsense
     "let g:rsenseHome = "/home/blueyi/opt/rsense-0.3"
     "If you want to start completion automatically, add the following code to .vimrc and restart Vim.
@@ -1069,7 +1090,7 @@ Plugin 'VundleVim/Vundle.vim'
     "set tags+=./addtags/qt5_h
     "set tags+=./addtags/cpp_stl
     "set tags+=./addtags/qt5_cpp
-    
+
     "--常用自动命令配置--
     " -----------------------------------------------------------------------------
     "自动切换目录为当前编辑文件所在目录
