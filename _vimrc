@@ -2,7 +2,7 @@
 "        需要手动进行的操作
 " =============================================================================
 " 推荐使用这个编译版本https://tuxproject.de/projects/vim/，这个版本对lua等支持都有，或者官方版本，官网版本暂时发现不支持lua，很多插件需要vim
-" 对lua的支持，例如neocomplete  
+" 对lua的支持，例如neocomplete
 " 默认下载的vim或者vim绿色版本可以需要的文件在https://github.com/blueyi/vim_misc.git
 "
 " 1.建立自动备份文件夹"~/vimbak"，不管是win还是linux都创建在个人用户下。vim自动
@@ -12,7 +12,7 @@
 " linux下执行以下两条命令：
 "   1."mkdir -p ~/.vim/bundle/Vundle.vim"
 "   2."git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-"   将.vimrc放在用户根目录下即可 
+"   将.vimrc放在用户根目录下即可
 "
 " win下使用cmd执行以下两条命令(默认cmd路径在当前用户文件夹)：
 "   1."md vimfiles\bundle\Vundle.vim"
@@ -23,7 +23,7 @@
 "   如果想让插件和vim在同一文件夹，只需要将vimfiles文件夹与vim文件处于同一个文件夹下
 "   并将_vimrc放在该文件夹下（本vimrc中的vundle默认采用这种方式）
 "
-" 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件  
+" 3.打开vim，手动执行":PluginInstall"，即可自动安装vundle管理的插件
 "
 " 一些需要注意的默认设置：
 " 1.C++程序编译时都默认加-g参数，方便gdb调试
@@ -443,13 +443,17 @@ Plugin 'VundleVim/Vundle.vim'
     " -----------------------------------------------------------------------------
     let mapleader = ';'  "将反斜扛\映射为;
 
-    " 常规模式下输入 cS 清除行尾空格
-    nmap cS :%s/\s\+$//g<CR>:noh<CR>
+    " 常规模式下输入;cS 清除整个文件行尾空格，会提示确认
+    nmap ;cS :%s/\s\+$//gc<CR>:noh<CR>
+    " 常规模式下输入;cSl 清除当前行尾空格
+    nmap ;cSl :s/\s\+$//<CR>:noh<CR>
 
-    " 常规模式下输入 cM 清除行尾 ^M 符号
-    nmap cM :%s/\r$//g<CR>:noh<CR>
+    " 常规模式下输入;cM 清除行尾 ^M 符号
+    nmap ;cM :%s/\r$//gc<CR>:noh<CR>
+    " 常规模式下输入;cMl 清除当前行尾 ^M 符号
+    nmap ;cMl :s/\r$//<CR>:noh<CR>
 
-    "标签窗口临时最大化  
+    "标签窗口临时最大化
     function! Zoom ()
         " check if is the zoomed state (tabnumber > 1 && window == 1)
         if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
@@ -467,7 +471,7 @@ Plugin 'VundleVim/Vundle.vim'
     endfunction
 
     "<leader>是反斜扛\
-    nmap <leader>z :call Zoom()<CR>  
+    nmap <leader>z :call Zoom()<CR>
 
     " 在不使用 MiniBufExplorer 插件时也可用<C-k,j,h,l>切换到上下左右的窗口中去
     noremap <c-k> <c-w>k
@@ -478,10 +482,10 @@ Plugin 'VundleVim/Vundle.vim'
     "常规模式下输入F2调用nerdtree插件
     nmap <F2> :NERDTreeToggle<CR>
 
-    "F3调用Tagbar插件 
+    "F3调用Tagbar插件
     nmap <F3> :TagbarToggle<CR>
 
-    "F4调用Gundo插件 
+    "F4调用Gundo插件
     nnoremap <F4> :GundoToggle<CR>
 
     "-- For C# development setting --
@@ -916,7 +920,7 @@ Plugin 'VundleVim/Vundle.vim'
                 \ "active_filetypes": ["c", "cpp", "py"],
                 \ "passive_filetypes": ["cu"]}
     "如果使用clang++则需要以下
-    "let g:syntastic_cpp_compiler = 'clang++' 
+    "let g:syntastic_cpp_compiler = 'clang++'
     "let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
     " support html5
     "let g:syntastic_html_tidy_exec = 'tidy5'
