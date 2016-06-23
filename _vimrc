@@ -103,12 +103,6 @@ if g:islinux
     set hlsearch        "高亮搜索
     set incsearch       "在输入要搜索的文字时，实时匹配
 
-    " Uncomment the following to have Vim jump to the last position when
-    " reopening a file
-    if has("autocmd")
-        au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-    endif
-
     if g:isGUI
         " Source a global configuration file if available
         if filereadable("/etc/vim/gvimrc.local")
@@ -118,8 +112,6 @@ if g:islinux
         " This line should not be removed as it ensures that various options are
         " properly set to work with the Vim-related packages available in Debian.
         runtime! debian.vim
-
-
 
         set t_Co=256                   " 在终端启用256色
 
@@ -315,6 +307,11 @@ Plugin 'VundleVim/Vundle.vim'
         syntax on
     endif
 
+    " Uncomment the following to have Vim jump to the last position when
+    " reopening a file
+    if has("autocmd")
+        au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    endif
 
     "--缩进设置--
     set autoindent        " 设置自动对齐(缩进)：即每行的缩进值与上一行相等；使用 noautoindent 取消设置
@@ -327,7 +324,7 @@ Plugin 'VundleVim/Vundle.vim'
     set cinoptions={g0,0,1s,t0,p2s,(03s,=.5s,>1s,=1s,:1s     "设置C/C++语言的具体缩进方式
     set smarttab    "使tab键可以根据上下文中的tabstop,softtabstop,shiftwidth智能设置
     set shiftround
- 
+
     "--backup/swap/info/undo文件相关设置--
     set backup                  "开启备份
     set backupdir=~/vimbak      "设置自动备份文件夹
@@ -340,7 +337,7 @@ Plugin 'VundleVim/Vundle.vim'
     "set writebackup            "保存文件前建立备份，保存成功后删除该备份
     "set nobackup               "设置无备份文件
     "set noswapfile             "设置无临时文件
- 
+
     "--导航相关设置--
     set cursorline             "突出显示当前行
     "-突出显示当前行和当前列-
@@ -477,7 +474,7 @@ Plugin 'VundleVim/Vundle.vim'
     noremap <c-j> <c-w>j
     noremap <c-h> <c-w>h
     noremap <c-l> <c-w>l
-    
+
     "常规模式下输入F2调用nerdtree插件
     nmap <F2> :NERDTreeToggle<CR>
 
@@ -1072,6 +1069,7 @@ Plugin 'VundleVim/Vundle.vim'
 
     " --auto-pairs configure--
     " -----------------------------------------------------------------------------
+    let g:AutoPairs = {'《':'》', '“':'”', '（':'）', '(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 
     " --easytags configure--
