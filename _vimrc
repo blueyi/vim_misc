@@ -180,8 +180,9 @@ Plugin 'VundleVim/Vundle.vim'
     Plugin 'xolox/vim-misc.git'
 
     " Auto complete
-    " Plugin 'Valloric/YouCompleteMe.git'
-    Plugin 'Shougo/neocomplete.vim.git'
+    Plugin 'Valloric/YouCompleteMe.git'
+    "Plugin 'rdnetto/YCM-Generator.git'
+"    Plugin 'Shougo/neocomplete.vim.git'
 
     "Speed up Vim by updating folds only when called-for.
     Plugin 'Konfekt/FastFold.git'
@@ -247,6 +248,9 @@ Plugin 'VundleVim/Vundle.vim'
     "Simple templates plugin for Vim
     Plugin 'blueyi/vim-template'
 
+    " other misc for vim running eg: ycm_extra_conf.py
+    Plugin 'blueyi/vim-dep'
+
 
 
     "********************************************
@@ -305,6 +309,11 @@ Plugin 'VundleVim/Vundle.vim'
     " line enables syntax highlighting by default.
     if has("syntax")
         syntax on
+    endif
+
+    " 包含C++头文件
+    if isdirectory('/usr/include/c++/4.8')
+        set path+=/usr/include/c++/4.8
     endif
 
     " Uncomment the following to have Vim jump to the last position when
@@ -853,7 +862,7 @@ Plugin 'VundleVim/Vundle.vim'
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=python3complete#Complete
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Enable heavy omni completion.
@@ -873,27 +882,31 @@ Plugin 'VundleVim/Vundle.vim'
     "--Youcompleteme configure--
     "Recompile and diagnostics withe F5
     "    nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-    ""    let g:ycm_use_ultisnips_completer = 1
-    ""
-    ""    "let g:ycm_global_ycm_extra_conf = '$VIM\vimfiles\bundle\YouCompleteMe\python\.ycm_extra_conf.py'
-    ""    " 设置转到定义处的快捷键为ALT + G，这个功能非常赞
-    ""    nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR>
-    ""    " 补全功能在注释中同样有效
-    ""    let g:ycm_complete_in_comments=1
-    ""    " 开启标签补全
-    ""    let g:ycm_collect_identifiers_from_tags_files = 1
-    ""    " 从第一个键入字符就开始罗列匹配项
-    ""    let g:ycm_min_num_of_chars_for_completion=1
-    ""    "离开插入模式后自动关闭预览窗口
-    ""    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-    ""    " 禁止缓存匹配项，每次都重新生成匹配项
-    ""    let g:ycm_cache_omnifunc=0
-    ""    " 语法关键字补全
-    ""    let g:ycm_seed_identifiers_with_syntax=1
-    ""    " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
-    ""    let g:ycm_key_invoke_completion = '<M-;>'
-    ""    "回车即选中当前项
-    ""    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+    " let g:ycm_use_ultisnips_completer = 1
+    
+    if g:islinux
+        let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/vim-dep/ycm_extra_conf.py'
+    else
+        let g:ycm_global_ycm_extra_conf = '$VIM/vimfiles/bundle/vim-dep/ycm_extra_conf.py'
+    endif
+    " 设置转到定义处的快捷键为ALT + G，这个功能非常赞
+    nmap <M-g> :YcmCompleter GoToDefinitionElseDeclaration <C-R>=expand("<cword>")<CR><CR>
+    " 补全功能在注释中同样有效
+    let g:ycm_complete_in_comments=1
+    " 开启标签补全
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    " 从第一个键入字符就开始罗列匹配项
+    let g:ycm_min_num_of_chars_for_completion=1
+    "离开插入模式后自动关闭预览窗口
+    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+    " 禁止缓存匹配项，每次都重新生成匹配项
+    let g:ycm_cache_omnifunc=0
+    " 语法关键字补全
+    let g:ycm_seed_identifiers_with_syntax=1
+    " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
+    let g:ycm_key_invoke_completion = '<M-;>'
+    "回车即选中当前项
+    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 
     "***************
     "--vim-airline configure--
@@ -1036,17 +1049,7 @@ Plugin 'VundleVim/Vundle.vim'
     " -----------------------------------------------------------------------------
     "   let g:templates_plugin_loaded = 1 to skip loading of this plugin.
     "   let g:templates_no_autocmd = 1 to disable automatic insertion of template in new files.
-    "    let g:templates_directory = '/path/to/directory' to specify a directory from where to search for additional global templates. See template search order below for more details. This can also be a list of paths.
-    "    let g:templates_name_prefix = '.vimtemplate.' to change the name of the template files that are searched.
-    "    let g:templates_global_name_prefix = 'template:' to change the prefix of the templates in the global template directory.
-    "    let g:templates_debug = 1 to have vim-template output debug information
-    "    let g:templates_fuzzy_start = 1 to be able to name templates with implicit fuzzy matching at the start of a template name. For example a template file named template:.c would match test.cpp.
-    "    let g:templates_tr_in = [ '.', '_', '?' ] and let g:templates_tr_out = [ '\.', '.*', '\?' ] would allow you to change how template names are interpretted as regular expressions for matching file names. This might be helpful if hacking on a windows box where * is not allowed in file names. The above configuration, for example, treates underscores _ as the typical regex wildcard .*.
-    "    let g:templates_no_builtin_templates = 1 to disable usage of the built-in templates. See template search order below for more details.
-    "    let g:templates_user_variables = [[USERVAR, UserFunc]] to enable user-defined variable expanding. See User-defined variable expanding below for details.
-    "    let g:templates_plugin_loaded = 1 to skip loading of this plugin.
-    "    let g:templates_no_autocmd = 1 to disable automatic insertion of template in new files.
-    "    let g:templates_directory = '/path/to/directory' to specify a directory from where to search for additional global templates. See template search order below for more details. This can also be a list of paths.
+    "   let g:templates_directory = '/path/to/directory' to specify a directory from where to search for additional global templates. See template search order below for more details. This can also be a list of paths.
     "    let g:templates_name_prefix = '.vimtemplate.' to change the name of the template files that are searched.
     "    let g:templates_global_name_prefix = 'template:' to change the prefix of the templates in the global template directory.
     "    let g:templates_debug = 1 to have vim-template output debug information
