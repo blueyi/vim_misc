@@ -420,6 +420,7 @@ Plugin 'VundleVim/Vundle.vim'
     else
         " colorscheme Tomorrow-Night-Eighties               "终端配色方案
         colorscheme molokai
+        "colorscheme desert
     endif
 
     " 显示/隐藏菜单栏、工具栏、滚动条，可用 Ctrl + F11 切换
